@@ -2,6 +2,7 @@
 import './App.css';
 
 import React, { useState } from 'react';
+import { DataWrapper } from './components/DataWrapper';
 
 function New(props) {
     return (
@@ -21,6 +22,8 @@ function Popular(props) {
     )
 };
 
+
+
 function Article(props) {
     return (
         <div className="item item-article">
@@ -39,17 +42,23 @@ function Video(props) {
     )
 };
 
+
+const PrettyVideo = DataWrapper(New, Popular)(Video)
+const PrettyArticle = DataWrapper(New, Popular)(Article)
+
 function List(props) {
     return props.list.map(item => {
         switch (item.type) {
             case 'video':
                 return (
-                    <Video {...item} />
+                    <PrettyVideo {...item} />
+                    // <Video {...item} />
                 );
 
             case 'article':
                 return (
-                    <Article {...item} />
+                    <PrettyArticle {...item} />
+                    // <Article {...item} />
                 );
         }
     });
